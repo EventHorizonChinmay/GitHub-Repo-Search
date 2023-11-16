@@ -1,5 +1,220 @@
 .App {
   text-align: center;
+  background-color: rgba(22,22,24,255);
+  color:rgba(200,200,200,1);
+  font-weight: 500;
+  height: 100vh;
+  overflow: auto;
+}
+
+.search-cum-sort-container{
+  display: flex;
+  margin: auto;
+  width: 550px;
+  justify-content:space-around;
+}
+.sortOptions{
+  margin: auto;
+  margin-left: 10px;
+  position: relative;
+  width: 220px;
+  /* background-color: magenta; */
+  display: flex;
+  align-items: center;
+  justify-content:space-between ;
+  height: 40px;
+
+  
+  /* font-family: Arial; */
+}
+
+.sortLogo{
+  margin-left: 10px;
+}
+
+.list-and-search{
+  background-color: rgb(200,200,200);
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 20px;
+  height: 40px;
+}
+.sortOptions select {
+  background-color: rgba(200,200,200,1);
+  /* display: none; */
+  /* height: 40px;   */
+  /* margin-left:10px; */
+  width: 90px;
+  padding: 5px;
+  padding-left: none;
+  /* text-align: center; */
+  /* border: 5px solid rgb(200,200,200); */
+  /* border-radius: 20px; */
+  border: none;
+  border-radius: 5px;
+
+}
+
+.sortOptions option{
+  height: 50px;
+}
+.select-selected {
+  background-color: DodgerBlue;
+}
+/* .sortOptions button{
+  margin-left: 10px;
+} */
+
+
+.refreshBtn{
+  /* margin-left:10px; */
+  border: 1px solid gray;
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  background-color: rgba(200,200,200,1);
+  cursor: pointer;
+  transition: ease-in-out 0.15s;
+}
+.refreshBtn:hover{
+  border: 2px solid gray;
+  box-shadow: 0 0 1.5px gray;
+  background: rgb(190, 190, 191);
+  height: 32px;
+  width: 32px;
+  border-radius: 50px;
+  transition: ease-in-out 0.15s;
+}
+.search{
+  width: 255px;
+  padding-left: 15px;
+  padding-right: 5px;
+  height: 44px;
+  border-radius: 22px;
+  display: flex;
+  background-color: rgba(200,200,200,1);
+  /* text-align: center; */
+  align-items: center;
+  margin: auto;
+  /* border: 2px solid black; */
+  /* display: flex; */
+  justify-content: space-between;
+}
+.beforeSearch{
+  width: 600px;
+  height: 60px;
+  border-radius: 30px;
+  margin-bottom: 30px;
+  transition: ease 0.2s;
+}
+
+.afterSearch{
+  width: 255px;
+  margin: none;
+
+  transition: ease 0.2s;
+}
+.searchInput{
+  height: 44px;
+  border-radius: 22px;
+  display: flex;
+  background-color: rgba(200,200,200,1);
+  text-align: center;
+  align-items: center;
+}
+
+.beforeSearchInput{
+  width:600px;
+  /* border: 1px solid blue; */
+
+}
+
+.search button{
+  /* margin-left: 10px; */
+  border: 1px solid gray;
+  height: 30px;
+  width: 40px;
+  border-radius: 50px;
+  background-color: rgba(200,200,200,1);
+}
+.search button:hover{
+  border: 2px solid gray;
+  box-shadow: 0 0 1.5px gray;
+  background: rgb(190, 190, 191);
+  height: 32px;
+  width: 42px;
+  border-radius: 50px;
+  transition: ease-in-out 0.15s;
+
+}
+
+
+.search button img:hover{
+  /* background-color: #282c34; */
+
+}
+
+.search img{
+  margin-right: 4px;
+  /* background-color: rgba(180,0,200,1); */
+}
+
+.search input{
+  background-color: rgba(0,00,0,0);
+  border: none;
+  padding: 5px;
+}
+
+.beforeSearch input{
+  font-size: 20px;
+  text-align: center;
+  width: 500px;
+  height: 35px;
+  margin: auto;
+  /* height: 50px; */
+  /* width: 515px; */
+}
+
+.beforeSearch button{
+  margin-right:10px ;
+}
+
+.search-results{
+  z-index: 2;
+}
+
+.searchField{
+  /* font-size: 50px; */
+  /* border: 5px solid white; */
+}
+
+.beforeSearchField{
+  /* height: 100%; */
+  /* background-color: red; */
+  border-radius: 30px ;
+  box-shadow: 0 0 5px white;
+  margin: auto;
+  margin-Top: 5%;
+  margin-bottom: 10%;
+  width: fit-content;
+  /* padding: 20px; */
+  font-size: x-large;
+  padding: 50px;
+  transition: ease 0.2s;
+
+}
+
+.afterSearchField{
+  margin: auto;
+  margin-top:none ;
+  height: 100px;
+  /* background-color: rgb(5, 5, 154); */
+  transition: ease 0.2s;
+  /* border-bottom: 1px solid gray; */
 }
 
 .App-logo {
@@ -27,6 +242,26 @@
 .App-link {
   color: #61dafb;
 }
+
+a{
+  color:rgb(81, 81, 204)
+}
+
+.contact{
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin:auto;
+  background-color:rgba(15,15,15,04);
+  text-shadow: 0 0 2px black;
+  width: 100%;
+  height: 90px;
+  /* border-top: 1px solid gray; */
+  box-shadow: 0 0 5px gray;
+
+}
+
 
 @keyframes App-logo-spin {
   from {

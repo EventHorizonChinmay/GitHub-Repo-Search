@@ -1,0 +1,39 @@
+
+.rainfall-animation {
+    /* display: block; */
+    background:  rgba(22,22,24,0.1);
+    font-size: 20px;
+    /* z-index: -1; */
+    position: absolute;
+    top: 180px;
+    left: 0;
+  }
+
+.word-dropper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    font-size: 10rem;
+  }
+  
+  .letter-fall {
+    animation: fallAnimation 10s linear infinite;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+  }
+  
+  @keyframes fallAnimation {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+  

@@ -1,0 +1,131 @@
+.cardsList{
+    margin-top: -89px;
+    margin-bottom:100px ;
+}
+
+
+
+.repo-list{
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    /* margin-top: 20xp; */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 01fr));
+    gap: 5px;
+    width: 95vw;
+    /* background-color: rgb(239, 7, 46); */
+    /* columns: 4; */
+}
+
+h2{
+    
+  text-decoration: none;
+    color: white;
+
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+}
+
+
+.card{
+    width: 400px;
+    border-radius: 20px;
+    border: 1px solid ;
+    padding: 5%;
+    margin: auto;
+    margin-top: 10px;
+    min-height: 300px ;
+}
+
+
+
+.card-title{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    /* background-color: red; */
+    justify-content: space-between;
+}
+
+.card-title img{
+    border-radius:100px;
+    border:2px solid gray ;
+}
+
+.card-title h2{
+    width: 200px;
+    height: auto;
+    /* background-color: blue; */
+    text-align: left ;
+    margin-left: 10px ;
+  overflow-wrap: break-word;
+}
+
+.details{
+    margin-top: 15px;
+    text-align: left;
+    overflow-wrap: break-word;
+}
+.furtherDetails{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.repoListControl{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+.repoListControl button{
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    background: rgb(190, 190, 191);
+    width: 80px;
+    transition:0.2s ease-in-out
+}
+.repoListControl button:hover{
+    height: 42px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 82px;
+    background-color: gray;
+    transition:0.2s ease-in-out;
+    border: 2px solid gray;
+    box-shadow: 0 0 1.5px gray;
+    background: rgb(190, 190, 191);
+    border-radius: 50px;
+    font-weight: 800;
+    transition: ease-in-out 0.15s;
+}
+
+
+.active{
+    background-color: aquamarine;
+}
+
+.pgno{
+    margin:5px;
+}
+
+@media only screen  and (max-width: 1060px) {
+    .cardsList{
+        margin-top: -5px;
+        border-top: 1px solid rgb(200,200,200) ;
+        box-shadow: 0 0 6px rgb(200,200,200);
+    }
+
+    
+}
