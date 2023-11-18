@@ -1,71 +1,3 @@
-// import React from "react";
-// import "./Card.css";
-// import { GiRoundStar } from "react-icons/gi";
-// import { MdCodeOff } from "react-icons/md";
-// import '../fonts.css'
-
-
-// const CardsList = ({ prevSearchTerm, repos, clearRepos }) => {
-  
-//   const clear=()=>{
-//     clearRepos()
-//   }
-//   return (
-//     <div className="cardsList">
-//       <div className="repoListControl">
-//         {" "}
-//         <p>Search term: {prevSearchTerm}</p>
-//         <button onClick={clear}>X &nbsp; Clear</button>
-//       </div>
-//       <div className="repo-list">
-//         {repos &&
-//           repos.map((repo) => (
-//             <div key={repo.id} className="card">
-//               <div
-//                 className="card-title"
-                
-//               >
-//               <a href={repo.html_url}>
-//                 <img
-//                   src={repo.owner.avatar_url}
-//                   alt="Avatar"
-//                   width={"100"}
-//                   height={100}
-//                 /></a>
-//                 <h2>
-//                   {repo.name.length < 20
-//                     ? repo.name
-//                     : repo.name.substring(0, 20) + "..."}
-//                 </h2>
-//                 <p title={
-//                   "watchers:" + repo.watchers_count + " | score:" + repo.score
-//                 }><GiRoundStar color="yellow"/>: {repo.stargazers_count}</p>
-//               </div>
-//               <div className="details">
-//                 <p>Description: 
-//                   </p>
-//                 <p style={{marginTop:'-10px', height:'120px', fontWeight:'300'}}>
-//                 {/* {(String(repo.description).length)} */}
-//                   {String(repo.description).length <250 ? String(repo.description) : String(repo.description).substring(250)+'...'  || "No description available."}
-//                   {/* abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMN */}
-                  
-//                 </p>
-//                 <hr/>
-//                 <div className="furtherDetails">
-//                 <span style={{fontSize:'20px', marginBottom:'0',  fontFamily: 'Barlow Condensed, sans-serif'}}><MdCodeOff /> {repo.language || "Language Not specified"}</span>
-//                 {/* <button> Read more</button> */}
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CardsList;
-
-
 import React, { useState, useEffect } from "react";
 import "./Card.css";
 import { GiRoundStar } from "react-icons/gi";
@@ -77,7 +9,7 @@ const CardsList = ({ prevSearchTerm, repos, clearRepos }) => {
   const itemsPerPage = 12; // Number of items per page
 
   const clear = () => {
-    clearRepos();
+    clearRepos('blabla');
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -165,3 +97,70 @@ const CardsList = ({ prevSearchTerm, repos, clearRepos }) => {
 };
 
 export default CardsList;
+
+// import React from "react";
+// import "./Card.css";
+// import { GiRoundStar } from "react-icons/gi";
+// import { MdCodeOff } from "react-icons/md";
+// import '../fonts.css'
+
+
+// const CardsList = ({ prevSearchTerm, repos, clearRepos }) => {
+  
+//   const clear=()=>{
+//     clearRepos()
+//   }
+//   return (
+//     <div className="cardsList">
+//       <div className="repoListControl">
+//         {" "}
+//         <p>Search term: {prevSearchTerm}</p>
+//         <button onClick={clear}>X &nbsp; Clear</button>
+//       </div>
+//       <div className="repo-list">
+//         {repos &&
+//           repos.map((repo) => (
+//             <div key={repo.id} className="card">
+//               <div
+//                 className="card-title"
+                
+//               >
+//               <a href={repo.html_url}>
+//                 <img
+//                   src={repo.owner.avatar_url}
+//                   alt="Avatar"
+//                   width={"100"}
+//                   height={100}
+//                 /></a>
+//                 <h2>
+//                   {repo.name.length < 20
+//                     ? repo.name
+//                     : repo.name.substring(0, 20) + "..."}
+//                 </h2>
+//                 <p title={
+//                   "watchers:" + repo.watchers_count + " | score:" + repo.score
+//                 }><GiRoundStar color="yellow"/>: {repo.stargazers_count}</p>
+//               </div>
+//               <div className="details">
+//                 <p>Description: 
+//                   </p>
+//                 <p style={{marginTop:'-10px', height:'120px', fontWeight:'300'}}>
+//                 {/* {(String(repo.description).length)} */}
+//                   {String(repo.description).length <250 ? String(repo.description) : String(repo.description).substring(250)+'...'  || "No description available."}
+//                   {/* abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMN */}
+                  
+//                 </p>
+//                 <hr/>
+//                 <div className="furtherDetails">
+//                 <span style={{fontSize:'20px', marginBottom:'0',  fontFamily: 'Barlow Condensed, sans-serif'}}><MdCodeOff /> {repo.language || "Language Not specified"}</span>
+//                 {/* <button> Read more</button> */}
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CardsList;

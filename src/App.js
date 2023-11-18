@@ -7,7 +7,6 @@ import { IoMdRefresh } from "react-icons/io";
 import { BiFontSize, BiSortDown } from "react-icons/bi";
 import { FaGithub } from "react-icons/fa";
 
-
 function App() {
   const [repos, setRepos] = useState([]); //List of Repos
 
@@ -17,49 +16,51 @@ function App() {
   const [searched, setSearched] = useState(false);
   const [prevSearchTerm, setPrevSearchTerm] = useState(searchTerm);
   const [prevSortOption, setPrevSortOption] = useState(sortOption);
-  const [searchedButNoResult, setSearchedButNoResult] = useState(false)
-  const [prevResults,setPrevResults] = useState(repos)
+  const [searchedButNoResult, setSearchedButNoResult] = useState(false);
+  const [prevResults, setPrevResults] = useState(repos);
   const [loading, setLoading] = useState(false);
 
+  //Keep track of state in console
+  // useEffect(() => {
+  //   console.log("Loading", loading);
+  //   console.log("Searching", searching);
+  //   console.log(
+  //     "SearchTerm",
+  //     searchTerm ? true : false,
+  //     searchTerm,
+  //     searchTerm.length
+  //   );
+  //   console.log("repos", repos);
 
-  useEffect(() => {
-    console.log("Loading", loading);
-    console.log("Searching", searching);
-    console.log(
-      "SearchTerm",
-      searchTerm ? true : false,
-      searchTerm,
-      searchTerm.length
-    );
-    console.log("repos", repos);
+  //   console.log(
+  //     "REQUEST:" +
+  //       `https://api.github.com/search/repositories?q=${searchTerm}&sort=${sortOption}&order=desc`
+  //   );
+  //   console.log("PrevSortOption:", prevSortOption);
+  //   console.log("sortOption:", sortOption);
+  //   console.log("searchedButNoResults", searchedButNoResult);
+  //   console.log("prevResults", prevResults);
+  // });
 
-    console.log(
-      "REQUEST:" +
-        `https://api.github.com/search/repositories?q=${searchTerm}&sort=${sortOption}&order=desc`
-    );
-    console.log("PrevSortOption:", prevSortOption);
-    console.log("sortOption:", sortOption);
-    console.log('searchedButNoResults',searchedButNoResult);
-    console.log("prevResults",prevResults)
-
-  });
+  //Handle search w/o inputs
   const emptySearch = () => {
     return <div>Please enter search keywords</div>;
   };
+
+  // Fetch Data function
   const fetchData = async () => {
     if (
-      searchTerm == prevSearchTerm &&
+      searchTerm === prevSearchTerm &&
       repos.length > 0 &&
-      sortOption == prevSortOption
+      sortOption === prevSortOption
     ) {
       return;
     }
 
     try {
-
-      setSearchedButNoResult(false)
-      setSearched(false)
-      if (!searchTerm) {
+      setSearchedButNoResult(false); // to handle search Failures, could be done using promise-reject as well
+      setSearched(false);
+      if (!searchTerm) { // TO  avoid unnecessary fetches if the search bar is empty
         emptySearch();
         alert("please enter search keywords");
       } else {
@@ -67,33 +68,34 @@ function App() {
         setSearching(true);
 
         const response = await fetch(
-          `https://api.github.com/search/repositories?q=${searchTerm}&sort=${sortOption}&order=${sortOption.includes('nam')? 'asc':'desc'}&per_page=100`
+          `https://api.github.com/search/repositories?q=${searchTerm}&sort=${sortOption}&order=${
+            sortOption.includes("nam") ? "asc" : "desc"
+          }&per_page=100`
         );
         const data = await response.json();
-        console.log(
-          "REQUEST:" +
-            `https://api.github.com/search/repositories?q=${searchTerm}&sort=${sortOption}&order=${sortOption.includes('nam')? 'asc':'desc'}&per_page=100`
-        );
-        console.log("API response:", data); // Log the data
+        // Log the data
+        // console.log("API response:", data); 
 
-        setRepos(data.items);
-        if (repos.length===0 && searched){
-          setSearchedButNoResult(true)
-        }
-        else{
-          setSearchedButNoResult(false)
+
+        setRepos(data.items); //Set fetched data in repolist called repos
+        if (repos.length === 0 && searched) {
+          setSearchedButNoResult(true);
+        } else {
+          setSearchedButNoResult(false);
         }
       }
-    } catch (error) {
+    } catch (error) {// Extra measure to notify user regarding an error
       console.error("Error fetching data:", error);
       alert("Error fetching data:", error);
     }
+
+    // Follwing setStates are used to display the data better
     setLoading(false);
     setSearching(false);
-    setSearched(true)
+    setSearched(true);
     setPrevSearchTerm(searchTerm);
     setPrevSortOption(sortOption);
-    setPrevResults(repos)
+    setPrevResults(repos);
   };
 
   const handleSearchChange = (e) => {
@@ -107,20 +109,19 @@ function App() {
     fetchData();
   };
 
-  const clearRepos = () => {
+  const clearRepos = (log) => {
     setRepos([]);
-    setPrevResults([])
-    setPrevSearchTerm('')
+    setPrevResults([]);
+    setPrevSearchTerm("");
   };
 
-  useEffect(()=>{
-    if(repos.length==0 ){
-      setSearchedButNoResult(true)
+  useEffect(() => { // A State to ensure 0 confusion if repos are not fouund
+    if (repos.length === 0) {
+      setSearchedButNoResult(true);
+    } else {
+      setSearchedButNoResult(false);
     }
-    else{
-      setSearchedButNoResult(false)
-    }
-  },[repos])
+  }, [repos]);
 
   return (
     <div className="App">
@@ -132,13 +133,18 @@ function App() {
             : "searchField afterSearchField"
         }
       >
+        <p>{repos.length === 0 && "Hello, Welcome to the"} </p>{" "}
+        {repos.length === 0 && (
+          <span style={{ fontSize: "35px", fontWeight: 400 }}>
+            <span style={{ fontSize: "40px" }}>dice </span> Github Repo Search!
+          </span>
+        )}
         <p>
-          {repos.length==0 && 'Hello, Welcome to the'}  </p> {repos.length==0 && <span style={{fontSize:'35px', fontWeight:400}}><span style={{fontSize:'40px'}}>dice </span> Github Repo Search!</span>}
-        <p >
-          {repos.length==0 && 'An easy way to search for your favorite public repositories on GitHub'  }<span> {repos.length===0 && <FaGithub/> } </span> </p>
-          <p>Enter a search term/keyword:{" "}
+          {repos.length === 0 &&
+            "An easy way to search for your favorite public repositories on GitHub"}
+          <span> {repos.length === 0 && <FaGithub />} </span>{" "}
         </p>
-
+        <p>Enter a search term/keyword: </p>
         <div className="search-cum-sort-container">
           <div
             className={
@@ -174,33 +180,50 @@ function App() {
             </button>
           </div>
 
-
-
           {repos.length > 0 && (
             <div className="sortOptions">
               <div className="list-and-search">
-              <label className="sortLogo"><BiSortDown color="black" height={'20px'}/> </label>
-              <select value={sortOption} onChange={handleSortChange}>
-                <option value="stars">Stars</option>
-                <option value="watchers">Watchers</option>
-                <option value="score">Score</option>
-                <option value="name">Name</option>
-                <option value="created_at">Created At</option>
-                <option value="updated_at">Updated At</option>
-              </select>
-              <button onClick={fetchData} className="refreshBtn" title="Update results">
-                {" "}
-                <IoMdRefresh />{" "}
-              </button>
+                <label className="sortLogo">
+                  <BiSortDown color="black" height={"20px"} />{" "}
+                </label>
+                <select value={sortOption} onChange={handleSortChange}>
+                  <option value="stars">Stars</option>
+                  <option value="watchers">Watchers</option>
+                  <option value="score">Score</option>
+                  <option value="name">Name</option>
+                  <option value="created_at">Created At</option>
+                  <option value="updated_at">Updated At</option>
+                </select>
+                <button
+                  onClick={fetchData}
+                  className="refreshBtn"
+                  title="Update results"
+                >
+                  {" "}
+                  <IoMdRefresh />{" "}
+                </button>
               </div>
             </div>
           )}
         </div>
       </div>
-      { prevSearchTerm!=='' && searchedButNoResult===true && (repos.length === 0 && prevResults.length===0) && <h3 style={{color:'orangered',fontWeight:'400', marginTop:'-70px'}}>Sorry, no results found for <span style={{fontWeight:'500'}}> "{prevSearchTerm}" </span> 
-      <p>Please try again...</p></h3>}
+      {prevSearchTerm !== "" &&
+        searchedButNoResult === true &&
+        repos.length === 0 &&
+        prevResults.length === 0 && (
+          <h3
+            style={{
+              color: "orangered",
+              fontWeight: "400",
+              marginTop: "-70px",
+            }}
+          >
+            Sorry, no results found for{" "}
+            <span style={{ fontWeight: "500" }}> "{prevSearchTerm}" </span>
+            <p>Please try again...</p>
+          </h3>
+        )}
       <div className="search-results">
-
         {repos.length > 0 && (
           <CardsList
             prevSearchTerm={prevSearchTerm}
@@ -208,22 +231,36 @@ function App() {
             clearRepos={clearRepos}
           />
         )}
-       
       </div>
 
-      {/* {loading &&<img src='https://i.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.webp' width={200} alt='' className='loadingGIF'/>} */}
+      {/* {loading && <img src='https://i.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.webp' width={200} alt='' className='loadingGIF'/>} */}
       {loading && <RainfallAnimation searchTerm={searchTerm} />}
 
       {(!repos || repos.length < 0) &&
         searchTerm.length !== 0 &&
         searching &&
         "No repos found with this query"}
-        <div className="contact">
-      <p style={{fontSize:'14px'}}> Facing issues? Pl contact: </p>
-      <p style={{fontSize:'14px'}}> 
-      Website: <a href="https://chinmay-g.netlify.app/" target="_blank" rel="noopener noreferrer">https://chinmay-g.netlify.app/</a> |
-      Email: <a href="mailto:chinmay.g2022@gmail.com" target="_blank" rel="noopener noreferrer"> chinmay.g2022@gmail.com</a> 
-      </p>
+      <div className="contact">
+        <p style={{ fontSize: "14px" }}> Facing issues? Pl contact: </p>
+        <p style={{ fontSize: "14px" }}>
+          Website:{" "}
+          <a
+            href="https://chinmay-g.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            https://chinmay-g.netlify.app/
+          </a>{" "}
+          | Email:{" "}
+          <a
+            href="mailto:chinmay.g2022@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            chinmay.g2022@gmail.com
+          </a>
+        </p>
       </div>
     </div>
   );
