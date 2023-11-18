@@ -67,12 +67,12 @@ function App() {
         setSearching(true);
 
         const response = await fetch(
-          `https://api.github.com/search/repositories?q=${searchTerm}&sort=${sortOption}&order=${sortOption.includes('nam')? 'asc':'desc'}`
+          `https://api.github.com/search/repositories?q=${searchTerm}&sort=${sortOption}&order=${sortOption.includes('nam')? 'asc':'desc'}&per_page=100`
         );
         const data = await response.json();
         console.log(
           "REQUEST:" +
-            `https://api.github.com/search/repositories?q=${searchTerm}&sort=${sortOption}&order=${sortOption.includes('nam')? 'asc':'desc'}`
+            `https://api.github.com/search/repositories?q=${searchTerm}&sort=${sortOption}&order=${sortOption.includes('nam')? 'asc':'desc'}&per_page=100`
         );
         console.log("API response:", data); // Log the data
 

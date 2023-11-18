@@ -113,13 +113,15 @@ const CardsList = ({ prevSearchTerm, repos, clearRepos }) => {
                   height={100}
                 />
               </a>
-              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" title={'Visit repo ' + (repo.name.length < 10
-                  ? repo.name
-                  : repo.name.substring(0, 8) + "...")}>
+              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" title={'Visit repo ' + repo.name}
+              // (repo.name.length < 10? 
+              // repo.name
+                  // : repo.name.substring(0, 8) + "...")}
+                  >
               <h2>
-                {repo.name.length < 35
+                {repo.name.length < 25
                   ? repo.name
-                  : repo.name.substring(0, 35) + "..."}
+                  : repo.name.substring(0, 25) + "..."}
               </h2>
               </a>
               <p
@@ -138,7 +140,7 @@ const CardsList = ({ prevSearchTerm, repos, clearRepos }) => {
               </p>
               <hr />
               <div className="furtherDetails">
-                <span style={{ fontSize: "20px", marginBottom: "0", fontFamily: 'Barlow Condensed, sans-serif' }}>
+                <span style={{ fontSize: "20px", marginBottom: "0", fontFamily: 'Barlow Condensed, sans-serif' }} title={'Languages: '+repo.language}>
                   <MdCodeOff /> {repo.language || "Language Not specified"}
                 </span>
               </div>
